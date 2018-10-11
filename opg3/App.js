@@ -1,12 +1,17 @@
 import React from 'react';
 import { StyleSheet, Text, View } from 'react-native';
-import { Calendar } from 'react-native-calendars';
+import { Agenda } from 'react-native-calendars';
 
 export default class App extends React.Component {
   render() {
     return (
       <View style={styles.container}>
-        <Calendar />
+        <Agenda firstDay={1} showWeekNumbers={true}
+          renderItem={(item, firstItemInDay) => {return (<View />);}}
+          renderDay={(day, item) => {return (<View/>);}}
+          renderEmptyDate={() => {return (<View />);}}
+          renderEmptyData = {() => {return (<View />);}}
+          rowHasChanged={(r1, r2) => {return r1.text !== r2.text}} />
       </View>
     );
   }
@@ -14,9 +19,7 @@ export default class App extends React.Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
+    height: '100%',
     backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
   },
 });
