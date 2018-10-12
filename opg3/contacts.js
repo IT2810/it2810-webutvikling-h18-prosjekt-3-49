@@ -10,11 +10,27 @@ class Contact extends Component {
 }
 
 export default class ContactManager extends Component {
-    render () {
-        return (
-            <View>
-            <Contact fname='Lais' lname='Umes'/>
+    constructor(props) {
+        super(props);
+        this.addContact = this.addContact.bind(this);
+        this.state = {contacts : [
+            <Contact fname='Lais' lname='Umes'/>,
             <Contact fname='Lisa' lname='Meesa'/>
+        ]
+    };
+
+    addContact(contact) {
+        this.setState((state,contact) =>
+            ({
+                contacts: state.contacts.append(contact)
+            }));
+    }
+
+    render() {
+        return (
+            this.addContact(<Contact fname='Lezz' lname='Esam' />)
+            <View>
+                <FlatList data = {this.getState.contacts}/>
             </View>
         );
     }
