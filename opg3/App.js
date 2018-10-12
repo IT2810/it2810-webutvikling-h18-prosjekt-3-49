@@ -7,13 +7,28 @@ export default class App extends React.Component {
     return (
       <View style={styles.container}>
         <Agenda firstDay={1} showWeekNumbers={true}
-          renderItem={(item, firstItemInDay) => {return (<View />);}}
-          renderDay={(day, item) => {return (<View/>);}}
-          renderEmptyDate={() => {return (<View />);}}
-          renderEmptyData = {() => {return (<View />);}}
+          renderItem={this.renderItem.bind(this)}
+          renderEmptyDate={this.renderEmptyDate.bind(this)}
+          renderEmptyData = {this.renderEmptyData.bind(this)}
           rowHasChanged={(r1, r2) => {return r1.text !== r2.text}} />
       </View>
     );
+  }
+
+  renderItem(item) {
+    return (
+      <View><Text>This is an item.</Text></View>
+    )
+  }
+  renderEmptyDate() {
+    return (
+      <View><Text>You have no events today.</Text></View>
+    )
+  }
+  renderEmptyData() {
+    return (
+      <View><Text>You have no events.</Text></View>
+    )
   }
 }
 
