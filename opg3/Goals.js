@@ -14,8 +14,16 @@ export default class Goals extends React.Component {
 
     componentDidMount() {
         this.state.storage._retrieveData("key1").then((res) => {
-            this.setState({goals: res});
-        });
+            this.setState({goals: res})
+        })
+    }
+
+    componentDidUpdate() {
+        this.state.storage._retrieveData("key1").then((res) => {
+            if (this.state.goals !== res) {
+                this.setState({goals: res})
+            }
+        })
     }
 
     render() {
@@ -26,7 +34,7 @@ export default class Goals extends React.Component {
                 </Text>
                 <TextInput
                     onSubmitEditing={(e) => {
-                        this.state.storage._appendData("key1", e.nativeEvent.text)
+                        this.state.storage._storeData("key1", e.nativeEvent.text)
                     }}
                 />
             </View>

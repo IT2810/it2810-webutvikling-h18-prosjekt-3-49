@@ -1,7 +1,6 @@
 import React from 'react';
-import {StyleSheet, Text, View, AsyncStorage} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import Goals from './Goals.js';
-import Storage from './Storage';
 
 
 export default class App extends React.Component {

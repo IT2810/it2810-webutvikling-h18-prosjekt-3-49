@@ -48,4 +48,12 @@ export default class Storage extends React.Component {
             // Error retrieving data
         }
     };
+
+    _removeMultiple = async (keys) => {
+        try {
+            AsyncStorage.multiRemove(keys);
+        } catch (error) {
+            // Error retrieving data
+        }
+    };
 }
