@@ -1,12 +1,13 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
+import {Calendar} from 'react-native-calendars';
 import Goals from './Goals.js';
-
 
 export default class App extends React.Component {
     render() {
         return (
             <View style={styles.container}>
+                <Calendar/>
                 <Goals/>
             </View>
         );
