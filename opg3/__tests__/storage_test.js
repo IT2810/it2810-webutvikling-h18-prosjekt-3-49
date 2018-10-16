@@ -11,11 +11,12 @@ afterAll(() => {
 
 it('retrieves correctly', async () => {
     await storage._storeData("testKey1", "testValue1");
-    let result = "";
+    let data = "";
     await storage._retrieveData("testKey1").then(res => {
-        result = res;
+        data = res;
     });
-    expect(result).not.toEqual(""); // Doesn't actually work, result is undefined
+    expect(data).not.toEqual(""); // Doesn't actually work, data is undefined so test passes
+//  expect(data).toEqual("testValue1"); // This is what we want to test
 });
 
 /*describe("nested block", () => {
