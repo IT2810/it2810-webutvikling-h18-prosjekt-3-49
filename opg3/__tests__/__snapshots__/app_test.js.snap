@@ -11,6 +11,7 @@ exports[`renders shallow correctly 1`] = `
     }
   }
 >
+  <Calendar />
   <Goals />
 </Component>
 `;
