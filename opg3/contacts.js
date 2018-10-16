@@ -1,43 +1,56 @@
-//[]  ()  {}  ⟨⟩
 import React, { Component} from 'react';
-import {AppRegistry, Text, View} from 'react-native'
-import Storage from "./Storage.js"
+import {AppRegistry, Text, View, FlatList} from 'react-native'
 
 
+function contact(props){
+    return (
+        <Text>Name: {props.fname} {props.lname} </Text>
+    );
+}
 
-
-export default class Contacts extends React.Component{
-
-    constructor(props){
+export default class ContactManager extends Component {
+    constructor(props) {
         super(props);
-        this.state={ contacts: [
-            {fname:"Lars", lname:"Møster"},
-            {fname:"Benjamin", lname:"Fimreite"},
-            {fname:"Birger", lname:"Topphol"}
-            ],
-            storage: new Storage()
+        this.state = {
+            contacts: [
+                {fname: 'Lais', lname:'ADDED MANUALY IN CONSTRUCTOR'},
+                {fname: 'Lisa', lname:'ADDED MANUALY IN CONSTRUCTOR'}
+            ]
         };
 
-        this.addContact = this.addContact.bind(this);
+
     }
 
-    addContact(dic) {
-        this.state.contacts.push(dic);
-        this.state.storage._storeData(
-            "contacts",
-            this.state.contacts)
+    componentDidMount() {
+        this.addContact('Jens', 'ADDED BY ADDCONTACT IN DIDMOUNT');
     }
+
+    addContact(fname,lname) {
+        let data = this.state.contacts;
+        data.push({fname: fname, lname: lname});
+        this.setState( {
+                contacts: data
+    })}
+
+    //<contact fname="Odd" lname="Kristian" />
+/*
+
+ */
 
     render() {
-        this.addContact({fname:"Jan", lname:"Fosse"});
-        return(
+
+        {this.state.contacts.map(x =>
+            console.log("from map: ",x.fname))}
+
+        return (
             <View>
-                <Text>
-                    Contacts: {this.state.contacts[0]}
-                </Text>
+                {this.state.contacts.map(contact =>
+                    <Text>Name: {contact.fname} {contact.lname} </Text>)
+                }
+            <Text>Halla balla</Text>
             </View>
-        )
+        );
     }
 }
-//contacts: list of dictionaries {fname,lname}
 
+AppRegistry.registerComponent('AwesomeProject', () => ContactManager);
