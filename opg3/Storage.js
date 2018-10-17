@@ -5,7 +5,7 @@ export default class Storage extends React.Component {
 
     _storeData = async (key, text) => {
         try {
-            await AsyncStorage.setItem(key, text);
+            await AsyncStorage.setItem(key, JSON.stringify(text));
         } catch (error) {
             // Error saving data
         }
@@ -19,7 +19,7 @@ export default class Storage extends React.Component {
                         res += ", ";
                     }
                     res += text;
-                    this._storeData(key, res);
+                    this._storeData(key, JSON.stringify(res));
                 }
             );
         } catch (error) {
@@ -31,7 +31,7 @@ export default class Storage extends React.Component {
         try {
             const value = await AsyncStorage.getItem(key);
             if (value !== null) {
-                return value;
+                return JSON.parse(value);
             }
         } catch (error) {
             // Error retrieving data

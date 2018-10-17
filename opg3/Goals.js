@@ -27,6 +27,14 @@ export default class Goals extends React.Component {
     }
 
     render() {
+        /*let lst = [
+            {fname: "per", lname: "persson"},
+            {fname: "terje", lname: "terjesson"}
+        ];
+        this.state.storage._storeData("contacts", lst);
+        this.state.storage._retrieveData("contacts").then(value => {
+            console.log(value);
+        });*/
         return (
             <View>
                 <Text>
