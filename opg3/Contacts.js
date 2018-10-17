@@ -45,7 +45,7 @@ export default class ContactManager extends Component {
         return (
             <View>
                 {this.state.contacts.map(contact =>
-                    <Text>Name: {contact.fname} {contact.lname} </Text>)
+                    <Text key = {Math.random()}>Name: {contact.fname} {contact.lname}</Text>)
                 }
             <Text>Halla balla</Text>
             </View>

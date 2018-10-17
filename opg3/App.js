@@ -1,7 +1,7 @@
 import React from 'react';
 import {StyleSheet, Text, View, AsyncStorage} from 'react-native';
     import { Calendar } from 'react-native-calendars';
-    import ContactManager from './contacts.js';
+    import ContactManager from './Contacts.js';
 import Goals from './Goals.js';
 import Storage from './Storage';
 
