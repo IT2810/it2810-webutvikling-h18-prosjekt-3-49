@@ -6,7 +6,13 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      items: {}
+      visItems: {},
+      allItems: {
+        // Example:
+        // '2018-10-17': {marked: true, items:
+        // [{text: 'hest'}, {text: 'test'}]
+        // }
+      }
     };
   }
 
@@ -14,6 +20,9 @@ export default class Calendar extends Component {
     return (
       <View style={styles.container}>
         <Agenda firstDay={1} showWeekNumbers={true}
+          items={this.state.visItems}
+          markedDates={this.state.allItems}
+          onDayPress={this.onDayPress.bind(this)}
           renderItem={this.renderItem.bind(this)}
           renderEmptyDate={this.renderEmptyDate.bind(this)}
           renderEmptyData = {this.renderEmptyData.bind(this)}
@@ -22,9 +31,24 @@ export default class Calendar extends Component {
     );
   }
 
+  onDayPress(day) {
+    const time = this.timeToString(day.timestamp);
+    const newItems = {};
+    if (this.state.allItems[time]) {
+      newItems[time] = this.state.allItems[time].items;
+      this.setState({visItems: newItems});
+      return
+    }
+    newItems[time] = []
+    this.setState({visItems: newItems});
+  }
+  timeToString(time) {
+    const date = new Date(time);
+    return date.toISOString().split('T')[0];
+  }
   renderItem(item) {
     return (
-      <View><Text>This is an item.</Text></View>
+      <View><Text>{item.text}</Text></View>
     )
   }
   renderEmptyDate() {
