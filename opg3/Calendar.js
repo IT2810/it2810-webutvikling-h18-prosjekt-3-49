@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, Text, View, FlatList } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 
 export default class Calendar extends Component {
@@ -9,8 +9,8 @@ export default class Calendar extends Component {
       visItems: {},
       allItems: {
         // Example:
-        // '2018-10-17': {marked: true, items:
-        // [{text: 'hest'}, {text: 'test'}]
+        // '2018-10-18': {marked: true, items:
+        // [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
         // }
       }
     };
@@ -48,7 +48,22 @@ export default class Calendar extends Component {
   }
   renderItem(item) {
     return (
-      <View><Text>{item.text}</Text></View>
+      <View style={[styles.event]}>
+        <Text>{item.text}</Text>
+        {item.goal &&
+          <Text>Working towards: {item.goal}</Text>
+        }
+        {item.contacts &&
+          <View>
+            <Text>With:</Text>
+            <FlatList
+              data={item.contacts}
+              renderItem={({item}) => <Text>{item}</Text>}
+              keyExtractor={(item, index) => index.toString()}>
+            </FlatList>
+          </View>
+        }
+      </View>
     )
   }
   renderEmptyDate() {
@@ -67,5 +82,11 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     backgroundColor: '#fff',
+  },
+  event: {
+    minHeight: 60,
+    margin: 4,
+    marginBottom: 0,
+    backgroundColor: '#ddd',
   },
 });
