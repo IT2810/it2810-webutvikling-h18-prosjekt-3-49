@@ -13,6 +13,7 @@ export default class Goals extends React.Component {
         this.addGoal = this.addGoal.bind(this);
         this.removeAllGoals = this.removeAllGoals.bind(this);
         this.removeGoal = this.removeGoal.bind(this);
+        this.removeNamedGoal = this.removeNamedGoal.bind(this);
     }
 
     componentDidMount() {
@@ -41,6 +42,13 @@ export default class Goals extends React.Component {
         }
     }
 
+    removeNamedGoal(tag) {
+        let goals = this.state.goals;
+        goals = goals.filter(goal => goal.tag !== tag);
+        this.setState({goals: goals});
+        this.state.storage._storeData("goals", goals);
+    }
+
     removeAllGoals() {
         this.state.storage._removeMultiple(["goals"]);
         this.setState({goals: []});
@@ -48,16 +56,19 @@ export default class Goals extends React.Component {
 
     render() {
         return (
-            <View>
-                <View>
-                    {this.state.goals.map((goal, index) =>
-                        <Text key={Math.random()}>Goal number {index + 1} is "{goal.tag}"</Text>
-                    )}
-                </View>
+            <View style={{alignSelf: 'stretch'}}>
+                {this.state.goals.map((goal, index) =>
+                    <View key={Math.random()} style={{flexDirection: 'row'}}>
+                        <Text>
+                            Goal number {index + 1} is "{goal.tag}"
+                        </Text>
+                        <Button color={"red"} onPress={() => this.removeNamedGoal(goal.tag)}
+                                title={"Delete"}/>
+                    </View>
+                )}
                 <TextInput
                     placeholder={"Enter goal here"}
                     value={this.state.goalToStore}
-                    style={{width: 150}}
                     onChangeText={text =>
                         this.setState({goalToStore: text})
                     }
@@ -70,23 +81,7 @@ export default class Goals extends React.Component {
                     onPress={this.addGoal}
                     title="Add goal"
                     color={"green"}/>
-                <TextInput
-                    placeholder={"Goal to delete"}
-                    value={this.state.goalToDelete}
-                    style={{width: 150}}
-                    onChangeText={text =>
-                        this.setState({goalToDelete: text})
-                    }
-                    onSubmitEditing={(e) => {
-                        this.setState({goalToDelete: e.nativeEvent.text});
-                        this.removeGoal();
-                    }
-                    }
-                />
-                <Button
-                    onPress={this.removeGoal}
-                    title="Remove one goal"
-                    color={"orange"}/>
+
                 <Button
                     onPress={this.removeAllGoals}
                     title="Remove all goals"
@@ -94,6 +89,4 @@ export default class Goals extends React.Component {
             </View>
         )
     };
-
-
 }
