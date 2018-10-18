@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
-import {AppRegistry, Text, View, Button} from 'react-native'
+import {AppRegistry, Text, View, Button, TextInput} from 'react-native'
+
 
 
 class Contact extends Component{
@@ -37,6 +38,8 @@ export default class ContactManager extends Component {
         super(props);
         this.removeContact = this.removeContact.bind(this);
         this.state = {
+            newFname: '',
+            newLname: '',
             renderMe: true,
             contacts: [
                 <Contact
@@ -68,7 +71,6 @@ export default class ContactManager extends Component {
 
     removeContact(id) {
         let contacts = this.state.contacts;
-
         contacts = contacts.filter(contact => contact.id !== id);
         this.setState({contacts: contacts});
 
@@ -102,30 +104,63 @@ export default class ContactManager extends Component {
                         <Contact key={contact.key} fname={contact.fname} lname={contact.lname}  />)
  */
 
+
     render() {
+    return (
+        <View>
+        {this.state.renderMe &&
+        <View>
 
-        return (
             <View>
-                {this.state.renderMe &&
-                <View>
-
-                    <View>
-                        {this.state.contacts.map(contact => contact)}
-                    </View>
-
-                    <View>
-                        {<Button
-                            onPress={() => this.addContact("New", "Contact")}
-                            title="Add"
-                            color="#20FF18"
-                            accessibilityLabel="accessibilityLabel er denne teksten"
-                        />}
-                    </View>
-                </View>
-                }
+                {this.state.contacts.map(contact => contact)}
             </View>
+
+            <View>
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.newFname}
+                    id={}
+                />
+
+                <TextInput
+                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                    onChangeText={(text) => this.setState({text})}
+                    value={this.state.newLname}
+                    id={}
+                />
+                <Button
+                    onPress={() => this.addContact(this.state.newFname, this.state.newLname)}
+                    title="Add"
+                    color="#20FF18"
+                    accessibilityLabel="accessibilityLabel er denne teksten"
+                />
+            </View>
+            
+        </View>
+        }
+        </View>
         );
     }
 }
 
-AppRegistry.registerComponent('AwesomeProject', () => ContactManager);
+
+class TextInput extends Component {
+    constructor(props) {
+        super(props);
+        this.state = { text: '' };
+    }
+
+    render() {
+        return (
+            <TextInput
+                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                onChangeText={(text) => this.setState({text})}
+                value={this.state.text}
+            />
+        );
+    }
+}
+
+
+//AppRegistry.registerComponent('AwesomeProject', () => ContactManager);
