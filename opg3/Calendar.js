@@ -1,32 +1,61 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Agenda } from 'react-native-calendars';
 
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      visItems: {},
-      allItems: {
-        // Example:
-        // '2018-10-18': {marked: true, items:
-        // [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
-        // }
+
+    let exampleItems = {
+      '2018-10-18': {marked: true, items:
+      [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
       }
+    }
+
+    let time = new Date();
+    time = time.toISOString().split('T')[0];
+    const newItems = {};
+    newItems[time] = [];
+    if (exampleItems[time]) {
+      newItems[time] = exampleItems[time].items;
+    };
+
+    this.state = {
+      addingEvent: false,
+      addingEventName: '',
+      selectedDay: time,
+      visItems: newItems,
+      allItems: exampleItems,
     };
   }
 
   render() {
     return (
-      <View style={styles.container}>
-        <Agenda firstDay={1} showWeekNumbers={true}
-          items={this.state.visItems}
-          markedDates={this.state.allItems}
-          onDayPress={this.onDayPress.bind(this)}
-          renderItem={this.renderItem.bind(this)}
-          renderEmptyDate={this.renderEmptyDate.bind(this)}
-          renderEmptyData = {this.renderEmptyData.bind(this)}
-          rowHasChanged={(r1, r2) => {return r1.text !== r2.text}} />
+      <View>
+      { !this.state.addingEvent &&
+        <View style={styles.container}>
+          <Agenda firstDay={1} showWeekNumbers={true}
+            items={this.state.visItems}
+            markedDates={this.state.allItems}
+            selected={this.state.selectedDay}
+            onDayPress={this.onDayPress.bind(this)}
+            renderItem={this.renderItem.bind(this)}
+            renderEmptyDate={this.renderEmptyDate.bind(this)}
+            renderEmptyData = {this.renderEmptyData.bind(this)}
+            rowHasChanged={(r1, r2) => {return r1.text !== r2.text}} />
+          <Button title='Add Event' onPress={() => {this.setState({addingEvent: true})}} />
+        </View>
+      }
+      { this.state.addingEvent &&
+        <KeyboardAvoidingView style={[styles.container, { justifyContent: 'center'}]} behavior='padding' enabled>
+          <TextInput
+            style={{height: 40}}
+            onChangeText={text => this.setState({addingEventName: text})}
+            placeholder='Event name' />
+          <Button title='Add' onPress={this.addEvent.bind(this)} />
+          <Button title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
+        </KeyboardAvoidingView>
+      }
       </View>
     );
   }
@@ -34,13 +63,11 @@ export default class Calendar extends Component {
   onDayPress(day) {
     const time = this.timeToString(day.timestamp);
     const newItems = {};
+    newItems[time] = []
     if (this.state.allItems[time]) {
       newItems[time] = this.state.allItems[time].items;
-      this.setState({visItems: newItems});
-      return
     }
-    newItems[time] = []
-    this.setState({visItems: newItems});
+    this.setState({visItems: newItems, selectedDay: time});
   }
   timeToString(time) {
     const date = new Date(time);
@@ -76,12 +103,32 @@ export default class Calendar extends Component {
       <View><Text>You have no events.</Text></View>
     )
   }
+  addEvent() {
+    let today = this.state.selectedDay
+    let items = []
+    if (this.state.allItems[today]) {
+      items = this.state.allItems[today].items
+    }
+
+    let newItem = {text: this.state.addingEventName}
+
+    let newAllItems = {}
+    newAllItems[today] = {marked: true, items: [...items, newItem]}
+
+    let newVisItems = {};
+    newVisItems[today] = [...items, newItem];
+
+    this.setState({addingEvent: false,
+      allItems: {...this.state.allItems, ...newAllItems},
+      visItems: newVisItems,
+    })
+  }
 }
 
 const styles = StyleSheet.create({
   container: {
+    paddingTop: 30,
     height: '100%',
-    backgroundColor: '#fff',
   },
   event: {
     minHeight: 60,
