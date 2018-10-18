@@ -37,6 +37,7 @@ export default class ContactManager extends Component {
         super(props);
         this.removeContact = this.removeContact.bind(this);
         this.state = {
+            renderMe: true,
             contacts: [
                 <Contact
                     removeContact={this.removeContact}
@@ -105,18 +106,23 @@ export default class ContactManager extends Component {
 
         return (
             <View>
+                {this.state.renderMe &&
                 <View>
-                    {this.state.contacts.map(contact => contact)}
-                </View>
 
-                <View>
-                {<Button
-                    onPress={() => this.addContact("New","Contact")}
-                    title="Add"
-                    color="#20FF18"
-                    accessibilityLabel="accessibilityLabel er denne teksten"
-                />}
+                    <View>
+                        {this.state.contacts.map(contact => contact)}
+                    </View>
+
+                    <View>
+                        {<Button
+                            onPress={() => this.addContact("New", "Contact")}
+                            title="Add"
+                            color="#20FF18"
+                            accessibilityLabel="accessibilityLabel er denne teksten"
+                        />}
+                    </View>
                 </View>
+                }
             </View>
         );
     }
