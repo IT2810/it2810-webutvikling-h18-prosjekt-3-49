@@ -1,33 +1,40 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Button, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Agenda } from 'react-native-calendars';
+import Storage from './Storage.js'
 
 export default class Calendar extends Component {
   constructor(props) {
     super(props);
 
-    let exampleItems = {
-      '2018-10-18': {marked: true, items:
-      [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
-      }
-    }
-
     let time = new Date();
     time = time.toISOString().split('T')[0];
-    const newItems = {};
-    newItems[time] = [];
-    if (exampleItems[time]) {
-      newItems[time] = exampleItems[time].items;
-    };
 
     this.state = {
+      storage: new Storage(),
       addingEvent: false,
       addingEventName: '',
       selectedDay: time,
-      visItems: newItems,
-      allItems: exampleItems,
+      allItems: {},
+      visItems: {},
     };
   }
+
+    componentDidMount() {
+      let time = this.state.selectedDay;
+
+      this.state.storage._retrieveData('allItems').then(value => {
+        const newItems = {};
+        newItems[time] = [];
+        if (value !== undefined) {
+          this.setState({allItems: value});
+          if (value[time]) {
+            newItems[time] = value[time].items;
+          }
+        }
+        this.setState({visItems: newItems});
+      })
+    }
 
   render() {
     return (
@@ -63,7 +70,7 @@ export default class Calendar extends Component {
   onDayPress(day) {
     const time = this.timeToString(day.timestamp);
     const newItems = {};
-    newItems[time] = []
+    newItems[time] = [];
     if (this.state.allItems[time]) {
       newItems[time] = this.state.allItems[time].items;
     }
@@ -104,24 +111,27 @@ export default class Calendar extends Component {
     )
   }
   addEvent() {
-    let today = this.state.selectedDay
-    let items = []
+    let today = this.state.selectedDay;
+    let items = [];
     if (this.state.allItems[today]) {
       items = this.state.allItems[today].items
     }
 
-    let newItem = {text: this.state.addingEventName}
+    let newItem = {text: this.state.addingEventName};
 
-    let newAllItems = {}
-    newAllItems[today] = {marked: true, items: [...items, newItem]}
+    let newAllItems = {};
+    newAllItems[today] = {marked: true, items: [...items, newItem]};
 
     let newVisItems = {};
     newVisItems[today] = [...items, newItem];
 
+    let itemsToSave = {...this.state.allItems, ...newAllItems};
     this.setState({addingEvent: false,
-      allItems: {...this.state.allItems, ...newAllItems},
+      allItems: itemsToSave,
       visItems: newVisItems,
-    })
+    });
+
+    this.state.storage._storeData('allItems', itemsToSave);
   }
 }
 
