@@ -32,7 +32,7 @@ export default class Acc extends React.Component {
 
     _subscribe = () => {
         this._subscription = Accelerometer.addListener(accelerometerData => {
-            this.setState({ accelerometerData });
+            this.setState({accelerometerData});
         });
     };
 

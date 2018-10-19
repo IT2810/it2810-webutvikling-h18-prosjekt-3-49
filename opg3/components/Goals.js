@@ -67,15 +67,15 @@ export default class Goals extends Component {
                     </View>
                 )}
                 <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    placeholder={"Enter goal here"}
-                    value={this.state.goalToStore}
-                    onChangeText={text =>
-                        this.setState({goalToStore: text})
-                    }
-                    onSubmitEditing={(e) => {
-                        this.setState({goalToStore: e.nativeEvent.text});
-                        this.addGoal();
-                    }}
+                           placeholder={"Enter goal here"}
+                           value={this.state.goalToStore}
+                           onChangeText={text =>
+                               this.setState({goalToStore: text})
+                           }
+                           onSubmitEditing={(e) => {
+                               this.setState({goalToStore: e.nativeEvent.text});
+                               this.addGoal();
+                           }}
                 />
                 <Button
                     onPress={this.addGoal}

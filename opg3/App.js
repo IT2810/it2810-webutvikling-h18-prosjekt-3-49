@@ -4,13 +4,13 @@ import Calendar from './components/Calendar.js';
 import ContactManager from './components/Contacts.js';
 import Goals from './components/Goals.js';
 import Accelerometer from './components/Accelerometer';
-import { createDrawerNavigator } from 'react-navigation';
+import {createDrawerNavigator} from 'react-navigation';
 
 class CalendarScreen extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView behavior='padding' enabled>
-                <Calendar />
+                <Calendar/>
             </KeyboardAvoidingView>
         );
     }
@@ -20,7 +20,7 @@ class ContactsScreen extends React.Component {
     render() {
         return (
             <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
-                <ContactManager />
+                <ContactManager/>
             </KeyboardAvoidingView>
         )
     }
@@ -28,9 +28,9 @@ class ContactsScreen extends React.Component {
 
 class GoalsScreen extends React.Component {
     render() {
-        return(
+        return (
             <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
-                <Goals />
+                <Goals/>
             </KeyboardAvoidingView>
         )
     }
@@ -38,8 +38,8 @@ class GoalsScreen extends React.Component {
 
 class AccelerometerScreen extends React.Component {
     render() {
-        return(
-            <View style={styles.container, styles.centered}>
+        return (
+            <View style={[styles.container, styles.centered]}>
                 <Accelerometer/>
             </View>
         )

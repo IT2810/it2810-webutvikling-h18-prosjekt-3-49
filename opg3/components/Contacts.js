@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, View, Button, TextInput} from 'react-native'
+import {Text, View, Button, TextInput} from 'react-native'
 import Storage from './Storage.js'
 
 
@@ -25,14 +25,14 @@ export default class ContactManager extends Component {
             })
     }
 
-    addContact(fname,lname) {
+    addContact(fname, lname) {
         let contacts = this.state.contacts;
-        contacts.push({key:Math.random(), fname:fname, lname:lname});
+        contacts.push({key: Math.random(), fname: fname, lname: lname});
 
-        this.setState( {
-                contacts: contacts,
-                newFname: "",
-                newLname: "",
+        this.setState({
+            contacts: contacts,
+            newFname: "",
+            newLname: "",
         });
         this.state.storage._storeData('contacts', contacts);
     }
@@ -45,47 +45,47 @@ export default class ContactManager extends Component {
     }
 
     render() {
-    return (
-        <View>
-        {this.state.renderMe &&
-        <View>
-
+        return (
             <View>
-                {this.state.contacts.map(contact =>
-                    <Contact
-                        id={contact.key}
-                        key={Math.random()}
-                        fname={contact.fname}
-                        lname={contact.lname}
-                        removeContact={this.removeContact}
-                    />
-                    )}
+                {this.state.renderMe &&
+                <View>
+
+                    <View>
+                        {this.state.contacts.map(contact =>
+                            <Contact
+                                id={contact.key}
+                                key={Math.random()}
+                                fname={contact.fname}
+                                lname={contact.lname}
+                                removeContact={this.removeContact}
+                            />
+                        )}
+                    </View>
+
+                    <View>
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                            onChangeText={(text) => this.setState({newFname: text})}
+                            value={this.state.newFname}
+                        />
+
+                        <TextInput
+                            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+                            onChangeText={(text) => this.setState({newLname: text})}
+                            value={this.state.newLname}
+                        />
+                        <Button
+                            onPress={() => this.addContact
+                            (this.state.newFname, this.state.newLname)}
+                            title="Add"
+                            color="#4a4"
+                            accessibilityLabel="accessibilityLabel er denne teksten"
+                        />
+                    </View>
+
+                </View>
+                }
             </View>
-
-            <View>
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({newFname:text})}
-                    value={this.state.newFname}
-                />
-
-                <TextInput
-                    style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({newLname:text})}
-                    value={this.state.newLname}
-                />
-                <Button
-                    onPress={() => this.addContact
-                    (this.state.newFname, this.state.newLname)}
-                    title="Add"
-                    color="#4a4"
-                    accessibilityLabel="accessibilityLabel er denne teksten"
-                />
-            </View>
-
-        </View>
-        }
-        </View>
         );
     }
 }
@@ -97,6 +97,7 @@ class Contact extends Component {
         this.delete = this.delete.bind(this);
         this.state = {renderMe: true};
     }
+
     delete() {
         this.props.removeContact(this.props.id);
         this.setState({renderMe: false});
