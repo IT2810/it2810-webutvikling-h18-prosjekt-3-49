@@ -10,7 +10,7 @@ export default class Calendar extends Component {
       '2018-10-18': {marked: true, items:
       [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
       }
-    }
+    };
 
     let time = new Date();
     time = time.toISOString().split('T')[0];
@@ -18,7 +18,7 @@ export default class Calendar extends Component {
     newItems[time] = [];
     if (exampleItems[time]) {
       newItems[time] = exampleItems[time].items;
-    };
+    }
 
     this.state = {
       addingEvent: false,
@@ -63,17 +63,17 @@ export default class Calendar extends Component {
   onDayPress(day) {
     const time = this.timeToString(day.timestamp);
     const newItems = {};
-    newItems[time] = []
+    newItems[time] = [];
     if (this.state.allItems[time]) {
       newItems[time] = this.state.allItems[time].items;
     }
     this.setState({visItems: newItems, selectedDay: time});
   }
-  timeToString(time) {
+  static timeToString(time) {
     const date = new Date(time);
     return date.toISOString().split('T')[0];
   }
-  renderItem(item) {
+  static renderItem(item) {
     return (
       <View style={[styles.event]}>
         <Text>{item.text}</Text>
@@ -93,27 +93,27 @@ export default class Calendar extends Component {
       </View>
     )
   }
-  renderEmptyDate() {
+  static renderEmptyDate() {
     return (
       <View><Text>You have no events today.</Text></View>
     )
   }
-  renderEmptyData() {
+  static renderEmptyData() {
     return (
       <View><Text>You have no events.</Text></View>
     )
   }
   addEvent() {
-    let today = this.state.selectedDay
-    let items = []
+    let today = this.state.selectedDay;
+    let items = [];
     if (this.state.allItems[today]) {
       items = this.state.allItems[today].items
     }
 
-    let newItem = {text: this.state.addingEventName}
+    let newItem = {text: this.state.addingEventName};
 
-    let newAllItems = {}
-    newAllItems[today] = {marked: true, items: [...items, newItem]}
+    let newAllItems = {};
+    newAllItems[today] = {marked: true, items: [...items, newItem]};
 
     let newVisItems = {};
     newVisItems[today] = [...items, newItem];
