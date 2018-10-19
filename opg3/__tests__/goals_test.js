@@ -1,5 +1,5 @@
 import React from 'react';
-import Goals from '../Goals';
+import Goals from '../components/Goals';
 
 import renderer from 'react-test-renderer';
 

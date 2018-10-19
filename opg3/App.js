@@ -1,9 +1,9 @@
 import React from 'react';
 import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
-import Calendar from './Calendar.js';
-import ContactManager from './Contacts.js';
-import Goals from './Goals.js';
-import Accelerometer from './Accelerometer';
+import Calendar from './components/Calendar.js';
+import ContactManager from './components/Contacts.js';
+import Goals from './components/Goals.js';
+import Accelerometer from './components/Accelerometer';
 import { createDrawerNavigator } from 'react-navigation';
 
 class CalendarScreen extends React.Component {

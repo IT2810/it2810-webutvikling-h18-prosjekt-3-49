@@ -1,5 +1,5 @@
 import React from 'react';
-import Accelerometer from "../Accelerometer";
+import Accelerometer from "../components/Accelerometer";
 
 import renderer from 'react-test-renderer';
 

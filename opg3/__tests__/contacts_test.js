@@ -1,5 +1,5 @@
 import React from 'react';
-import ContactManager from "../Contacts";
+import ContactManager from "../components/Contacts";
 
 import renderer from 'react-test-renderer';
 

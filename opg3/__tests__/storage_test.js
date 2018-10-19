@@ -1,6 +1,6 @@
 import React from 'react';
 import MockAsyncStorage from 'mock-async-storage';
-import Storage from '../Storage';
+import Storage from '../components/Storage';
 
 const mock = () => {
     const mockImpl = new MockAsyncStorage();
