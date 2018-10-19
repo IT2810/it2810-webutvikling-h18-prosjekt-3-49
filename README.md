@@ -38,7 +38,13 @@ Brukes for å lage React-Native applikasjonen med alle de nødvendige node_modul
 3rd-party-bibliotek som blir brukt for å opprette en kalender i appen. Vi valgte å bruke dette apiet fordi det å lage en kalender er et løst problem, og vi ville bruke tiden vår på å lage funksjonalitet utover dette. Ved å bruke React-native-calendars kunne vi raskt komme i gang og teste funksjonalitet med en kalender, og vi fikk også tilgang til mye funksjonalitet som lot oss spesifisere oppførselen slik vi ville. 
 
 - Jest
-Sentralt for testing av appen
+Sentralt for testing av appen. Bruker 'react-test-renderer' til å kjøre snapshot based enhetstesting av funksjonaliteten. Tester også Async storage. 
+
+- React-Navigation
+Brukes til å navigere mellom de ulike sidene i appen på en naturlig måte
+
+- Round-to
+Brukes for å runde av tall på en efkketiv måte
 
 For å starte appen må du klone eller laste ned dette repositoriet samt node.js. Deretter kjører du kommandoene
 ```
