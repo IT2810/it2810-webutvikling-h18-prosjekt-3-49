@@ -56,11 +56,11 @@ export default class Calendar extends Component {
       { this.state.addingEvent &&
         <View style={[styles.container, styles.centered]}>
           <TextInput
-            style={{height: 40}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={text => this.setState({addingEventName: text})}
             placeholder='Event name' />
-          <Button title='Add' onPress={this.addEvent.bind(this)} />
-          <Button title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
+          <Button color='#4a4' title='Add' onPress={this.addEvent.bind(this)} />
+          <Button color='#c55' title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
         </View>
       }
       </View>
@@ -141,7 +141,7 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   event: {
-    minHeight: 60,
+    minHeight: 80,
     margin: 4,
     marginBottom: 0,
     backgroundColor: '#ddd',

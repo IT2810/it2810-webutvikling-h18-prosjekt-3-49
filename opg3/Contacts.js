@@ -23,7 +23,7 @@ class Contact extends Component {
                     <Button
                         onPress={this.delete}
                         title="Delete"
-                        color="#FF2018"
+                        color="#c55"
                         accessibilityLabel="accessibilityLabel er denne teksten"
                     />
                 </View>
@@ -127,11 +127,11 @@ export default class ContactManager extends Component {
                     onPress={() => this.addContact
                     (this.state.newFname, this.state.newLname)}
                     title="Add"
-                    color="#20FF18"
+                    color="#4a4"
                     accessibilityLabel="accessibilityLabel er denne teksten"
                 />
             </View>
-            
+
         </View>
         }
         </View>
