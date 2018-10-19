@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 import Storage from './Storage';
 
-export default class Goals extends React.Component {
+export default class Goals extends Component {
 
     constructor(props) {
         super(props);
