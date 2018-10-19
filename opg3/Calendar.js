@@ -7,35 +7,32 @@ export default class Calendar extends Component {
   constructor(props) {
     super(props);
 
-    let exampleItems = {
-      '2018-10-18': {marked: true, items:
-      [{text: 'hest', goal: 'horsing around', contacts: ['Bob', 'Lars Møster']}, {text: 'test'}]
-      }
-    };
-
     let time = new Date();
     time = time.toISOString().split('T')[0];
-    const newItems = {};
-    newItems[time] = [];
-    if (exampleItems[time]) {
-      newItems[time] = exampleItems[time].items;
-    }
 
     this.state = {
       storage: new Storage(),
       addingEvent: false,
       addingEventName: '',
       selectedDay: time,
-      visItems: newItems,
-      allItems: exampleItems,
+      allItems: {},
+      visItems: {},
     };
   }
 
     componentDidMount() {
+      let time = this.state.selectedDay;
+
       this.state.storage._retrieveData('allItems').then(value => {
+        const newItems = {};
+        newItems[time] = [];
         if (value !== undefined) {
           this.setState({allItems: value});
+          if (value[time]) {
+            newItems[time] = value[time].items;
+          }
         }
+        this.setState({visItems: newItems});
       })
     }
 
