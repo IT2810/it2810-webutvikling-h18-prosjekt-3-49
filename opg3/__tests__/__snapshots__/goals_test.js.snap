@@ -7,6 +7,13 @@ exports[`renders correctly 1`] = `
     onChangeText={[Function]}
     onSubmitEditing={[Function]}
     placeholder="Enter goal here"
+    style={
+      Object {
+        "borderColor": "gray",
+        "borderWidth": 1,
+        "height": 40,
+      }
+    }
   />
   <View
     accessibilityComponentType="button"
@@ -49,7 +56,7 @@ exports[`renders correctly 1`] = `
               "textAlign": "center",
             },
             Object {
-              "color": "green",
+              "color": "#4a4",
             },
           ]
         }
@@ -99,7 +106,7 @@ exports[`renders correctly 1`] = `
               "textAlign": "center",
             },
             Object {
-              "color": "red",
+              "color": "#c55",
             },
           ]
         }

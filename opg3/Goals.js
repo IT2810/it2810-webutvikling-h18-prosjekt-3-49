@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {Component} from 'react';
 import {View, Text, TextInput, Button} from 'react-native';
 import Storage from './Storage';
 
-export default class Goals extends React.Component {
+export default class Goals extends Component {
 
     constructor(props) {
         super(props);
@@ -59,14 +59,14 @@ export default class Goals extends React.Component {
             <View>
                 {this.state.goals.map((goal, index) =>
                     <View key={Math.random()} style={{flexDirection: 'row'}}>
-                        <Text>
-                            Goal number {index + 1} is "{goal.tag}"
+                        <Text style={{width: '90%'}}>
+                            #{index + 1}: {goal.tag}
                         </Text>
-                        <Button color={"red"} onPress={() => this.removeNamedGoal(goal.tag)}
-                                title={"Delete"}/>
+                        <Button color={"#c55"} onPress={() => this.removeNamedGoal(goal.tag)}
+                                title={"X"}/>
                     </View>
                 )}
-                <TextInput
+                <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}}
                     placeholder={"Enter goal here"}
                     value={this.state.goalToStore}
                     onChangeText={text =>
@@ -80,12 +80,12 @@ export default class Goals extends React.Component {
                 <Button
                     onPress={this.addGoal}
                     title="Add goal"
-                    color={"green"}/>
+                    color={"#4a4"}/>
 
                 <Button
                     onPress={this.removeAllGoals}
                     title="Remove all goals"
-                    color={"red"}/>
+                    color={"#c55"}/>
             </View>
         )
     };
