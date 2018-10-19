@@ -1,8 +1,8 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-    import { Calendar } from 'react-native-calendars';
-    import ContactManager from './Contacts.js';
-    import Goals from './Goals.js';
+import Calendar from './Calendar.js';
+import ContactManager from './Contacts.js';
+import Goals from './Goals.js';
 
 export default class App extends React.Component {
     render() {
@@ -25,4 +25,3 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
     },
 });
-
