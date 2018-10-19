@@ -61,12 +61,8 @@ export default class ContactManager extends Component {
     }
 
     componentDidMount() {
-        //this.addContact('Nils', 'Oshuendo');
-
-        console.log(this.state.storage._retrieveData('contacts'));
         this.state.storage._retrieveData('contacts')
             .then(value => {
-                console.log(value);
                 if (value !== undefined) {
                     this.setState({contacts: value});
                 }
