@@ -3,6 +3,7 @@ import {StyleSheet, Text, View, Button, TextInput} from 'react-native'
 import Storage from './Storage.js'
 
 
+
 class Contact extends Component {
     constructor(props) {
         super(props);
@@ -39,25 +40,11 @@ export default class ContactManager extends Component {
         this.removeContact = this.removeContact.bind(this);
         this.state = {
             storage: new Storage(),
-            newFname: '',
+            newFname: '', //for adding contact
             newLname: '',
             renderMe: true,
-            contacts: [
-                /*
-                {key:Math.random(), fname:'Lars', lname:'Jens'}
-                <Contact
-                    removeContact={this.removeContact}
-                    key={Math.random()}
-                    fname='Lars' lname='Jens' />,
-                <Contact
-                    removeContact={this.removeContact}
-                    key={Math.random()}
-                    fname='Ask' lname='Yri' />,
-                */
-            ]
+            contacts: [] //Entries like: {key:0254, fname:'Lars', lname:'Jens'}
         };
-            console.log(this.state.contacts); //TODO
-
     }
 
     componentDidMount() {
@@ -67,13 +54,7 @@ export default class ContactManager extends Component {
                     this.setState({contacts: value});
                 }
             })
-
     }
-            /*
-            <Contact removeContact={this.removeContact}
-                            key={Math.random()}
-                           fname={fname} lname={lname} />
-             */
 
     addContact(fname,lname) {
         let contacts = this.state.contacts;
@@ -86,7 +67,6 @@ export default class ContactManager extends Component {
         });
         this.state.storage._storeData('contacts', contacts);
     }
-
 
     removeContact(key) {
         let contacts = this.state.contacts;
@@ -137,6 +117,37 @@ export default class ContactManager extends Component {
         </View>
         }
         </View>
+        );
+    }
+}
+
+
+class Contact extends Component {
+    constructor(props) {
+        super(props);
+        this.delete = this.delete.bind(this);
+        this.state = {renderMe: true};
+    }
+    delete() {
+        this.props.removeContact(this.props.id);
+        this.setState({renderMe: false});
+    }
+
+    render() {
+        return (
+            <View>
+                {this.state.renderMe &&
+                <View>
+                    <Text> {this.props.fname} {this.props.lname} </Text>
+                    <Button
+                        onPress={this.delete}
+                        title="Delete"
+                        color="#FF2018"
+                        accessibilityLabel="accessibilityLabel er denne teksten"
+                    />
+                </View>
+                }
+            </View>
         );
     }
 }
