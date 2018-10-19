@@ -1,10 +1,8 @@
 import React from 'react';
-import {StyleSheet, Text, View, AsyncStorage} from 'react-native';
+import {StyleSheet, View} from 'react-native';
     import { Calendar } from 'react-native-calendars';
     import ContactManager from './Contacts.js';
-import Goals from './Goals.js';
-import Storage from './Storage';
-
+    import Goals from './Goals.js';
 
 export default class App extends React.Component {
     render() {
@@ -22,6 +20,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#fff',
+        alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
     },
