@@ -48,11 +48,38 @@ export default class Acc extends React.Component {
             y = roundTo(y, 1);
             z = roundTo(z, 1);
         }
+        if (Math.abs(x) >= Math.abs(y) && Math.abs(x) >= Math.abs(z)) {
+            return (
+                <View>
+                    <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
+                    <Text style={{backgroundColor: '#66DF59'}}>It seems that your phone is in landscape-mode!</Text>
+                </View>
+            )
+        }
+
+        if (Math.abs(y) >= Math.abs(x) && Math.abs(y) >= Math.abs(z)) {
+            return (
+                <View>
+                    <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
+                    <Text style={{backgroundColor: '#6D6FEF'}}>It seems that your phone is in portrait-mode!</Text>
+                </View>
+            )
+        }
+
+        if (Math.abs(z) >= Math.abs(x) && Math.abs(z) >= Math.abs(y)) {
+            return (
+                <View>
+                    <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
+                    <Text style={{backgroundColor: '#5CAACC'}}>It seems that your phone is lying down!</Text>
+                </View>
+            )
+        }
+
         return (
             <View>
-                <Text>Accelerometer values: x = {x}, y = {y}, z = {z}</Text>
+                <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
+                <Text>Values are undefined</Text>
             </View>
         )
     }
-
 }
