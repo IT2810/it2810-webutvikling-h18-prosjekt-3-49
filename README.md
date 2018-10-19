@@ -52,6 +52,10 @@ For å starte appen må du klone eller laste ned dette repositoriet samt node.js
 npm install
 expo start
 ```
+## Bruksanvisning
+Velg en dag i kalenderen for å få opp en agenda. Bruk Add for å legge til events, hvor du kan velge i listen av mål og kontakter for å legge dem til.
+`Swipe høyre` for å navigere mellom sider.
+
 ## Innhold og funksjonalitet
 Applikasjonen displayer en kalender som kan inneholde events. Du kan trykke på dagene for å få opp agendaen din for den dagen. Her kan du legge til events, for å planlegge uken din. Appen lar deg også legge til kontakter i en egen kontaktliste, som du kan knytte til eventsene, og likedan lar den deg sette mål som også kan knyttes til eventsene. Dermed kan man enkelt se når man har planer, hvem man har planer med og hvilket mål man jobber mot. Hvis du for eksempel har et mål om å komme i bedre form kan du legge til dette, og så sette opp treningsøkter mot dette målet. Her kan du også legge til treningskompisene dine, og finne ut når du trener med hvem. 
 
