@@ -21,17 +21,6 @@ export default class Storage {
         }
     };
 
-    _retrieveMultiple = async (keys) => {
-        try {
-            const values = await AsyncStorage.multiGet(keys);
-            if (values !== null) {
-                return values;
-            }
-        } catch (error) {
-            // Error retrieving data
-        }
-    };
-
     _removeMultiple = async (keys) => {
         try {
             AsyncStorage.multiRemove(keys);

@@ -5,13 +5,15 @@ exports[`renders shallow correctly 1`] = `
   style={
     Object {
       "alignItems": "center",
+      "alignSelf": "stretch",
       "backgroundColor": "#fff",
       "flex": 1,
       "justifyContent": "center",
     }
   }
 >
-  <Calendar />
   <Goals />
+  <Calendar />
+  <ContactManager />
 </Component>
 `;
