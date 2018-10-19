@@ -114,7 +114,7 @@ export default class ContactManager extends Component {
     }
 }
 
-/*
+
 const styles = StyleSheet.create({
 
     picture: {
