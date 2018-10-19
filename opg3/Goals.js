@@ -56,7 +56,7 @@ export default class Goals extends React.Component {
 
     render() {
         return (
-            <View style={{alignSelf: 'stretch'}}>
+            <View>
                 {this.state.goals.map((goal, index) =>
                     <View key={Math.random()} style={{flexDirection: 'row'}}>
                         <Text>
