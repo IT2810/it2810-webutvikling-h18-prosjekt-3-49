@@ -1,7 +1,17 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`renders correctly 1`] = `
-<View>
+<View
+  style={
+    Object {
+      "alignSelf": "center",
+      "backgroundColor": "#fff",
+      "height": "100%",
+      "justifyContent": "center",
+      "width": "70%",
+    }
+  }
+>
   <Text
     accessible={true}
     allowFontScaling={true}
