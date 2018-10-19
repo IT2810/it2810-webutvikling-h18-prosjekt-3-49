@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, View, FlatList, Button, TextInput, KeyboardAvoidingView } from 'react-native';
 import { Agenda } from 'react-native-calendars';
+import Storage from './Storage.js'
 
 export default class Calendar extends Component {
   constructor(props) {
@@ -21,6 +22,7 @@ export default class Calendar extends Component {
     }
 
     this.state = {
+      storage: new Storage(),
       addingEvent: false,
       addingEventName: '',
       selectedDay: time,
@@ -28,6 +30,14 @@ export default class Calendar extends Component {
       allItems: exampleItems,
     };
   }
+
+    componentDidMount() {
+      this.state.storage._retrieveData('allItems').then(value => {
+        if (value !== undefined) {
+          this.setState({allItems: value});
+        }
+      })
+    }
 
   render() {
     return (
@@ -69,11 +79,11 @@ export default class Calendar extends Component {
     }
     this.setState({visItems: newItems, selectedDay: time});
   }
-  static timeToString(time) {
+  timeToString(time) {
     const date = new Date(time);
     return date.toISOString().split('T')[0];
   }
-  static renderItem(item) {
+  renderItem(item) {
     return (
       <View style={[styles.event]}>
         <Text>{item.text}</Text>
@@ -93,12 +103,12 @@ export default class Calendar extends Component {
       </View>
     )
   }
-  static renderEmptyDate() {
+  renderEmptyDate() {
     return (
       <View><Text>You have no events today.</Text></View>
     )
   }
-  static renderEmptyData() {
+  renderEmptyData() {
     return (
       <View><Text>You have no events.</Text></View>
     )
@@ -118,10 +128,13 @@ export default class Calendar extends Component {
     let newVisItems = {};
     newVisItems[today] = [...items, newItem];
 
+    let itemsToSave = {...this.state.allItems, ...newAllItems};
     this.setState({addingEvent: false,
-      allItems: {...this.state.allItems, ...newAllItems},
+      allItems: itemsToSave,
       visItems: newVisItems,
-    })
+    });
+
+    this.state.storage._storeData('allItems', itemsToSave);
   }
 }
 
