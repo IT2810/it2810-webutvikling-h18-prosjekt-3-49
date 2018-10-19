@@ -44,11 +44,11 @@ export default class ContactManager extends Component {
             contacts: [
                 <Contact
                     removeContact={this.removeContact}
-                    id={Math.random()}
+                    key={Math.random()}
                     fname='Lars' lname='Jens' />,
                 <Contact
                     removeContact={this.removeContact}
-                    id={Math.random()}
+                    key={Math.random()}
                     fname='Ask' lname='Yri' />,
             ]
         };
@@ -62,48 +62,19 @@ export default class ContactManager extends Component {
     addContact(fname,lname) {
         let contacts = this.state.contacts;
         contacts.push(<Contact removeContact={this.removeContact}
-                           id={Math.random()}
+                            key={Math.random()}
                            fname={fname} lname={lname} />);
         this.setState( {
                 contacts: contacts
     })}
 
 
-    removeContact(id) {
+    removeContact(key) {
         let contacts = this.state.contacts;
-        contacts = contacts.filter(contact => contact.id !== id);
+        contacts = contacts.filter(contact => contact.key !== key);
         this.setState({contacts: contacts});
 
-        /*
-        //for (let item of list) {
-        for (let i = 0; i < list.length; i++) {
-            if (list[i].key === key) {
-                list.splice(i);
-            }
-        }
-        throw new Error("Failed to remove contact! key: " + key);
-        */
     }
-
-
-
-    //<contact fname="Odd" lname="Kristian" />
-/*
-{fname=contact.fname} {lname=contact.lname} />
-                    <Text key = {Math.random()}>Name: {contact.fname} {contact.lname}</Text>)
-
-        {this.state.contacts.map(x =>
-            console.log("from map: ",x.fname))}
-
-
-            ***NB!***
-                <FlatList
-                    data={this.state.contacts}
-                    renderItem={({contact}) => {contact}}
-                    />
-                        <Contact key={contact.key} fname={contact.fname} lname={contact.lname}  />)
- */
-
 
     render() {
     return (
@@ -118,19 +89,18 @@ export default class ContactManager extends Component {
             <View>
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({text})}
+                    onChangeText={(text) => this.setState({newFname:text})}
                     value={this.state.newFname}
-                    id={}
                 />
 
                 <TextInput
                     style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                    onChangeText={(text) => this.setState({text})}
+                    onChangeText={(text) => this.setState({newLname:text})}
                     value={this.state.newLname}
-                    id={}
                 />
                 <Button
-                    onPress={() => this.addContact(this.state.newFname, this.state.newLname)}
+                    onPress={() => this.addContact
+                    (this.state.newFname, this.state.newLname)}
                     title="Add"
                     color="#20FF18"
                     accessibilityLabel="accessibilityLabel er denne teksten"
@@ -144,23 +114,27 @@ export default class ContactManager extends Component {
     }
 }
 
+/*
+const styles = StyleSheet.create({
 
-class TextInput extends Component {
-    constructor(props) {
-        super(props);
-        this.state = { text: '' };
-    }
+    picture: {
+        backgroundColor: "#abcccc",
+        alignItems: "center",
+    },
 
-    render() {
-        return (
-            <TextInput
-                style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-                onChangeText={(text) => this.setState({text})}
-                value={this.state.text}
-            />
-        );
-    }
-}
+    infoLine: {
+        flexDirection: "row",
+        paddingLeft: 10,
+        borderBottomWidth: 1,
+        borderBottomColor: "#aaa",
+    },
 
-
-//AppRegistry.registerComponent('AwesomeProject', () => ContactManager);
+    text: {
+        fontSize: 18,
+        paddingBottom: 15,
+        paddingTop: 15,
+        paddingLeft: 20,
+    },
+});
+/*
+*/
