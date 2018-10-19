@@ -59,11 +59,11 @@ export default class Goals extends Component {
             <View>
                 {this.state.goals.map((goal, index) =>
                     <View key={Math.random()} style={{flexDirection: 'row'}}>
-                        <Text>
-                            Goal number {index + 1} is "{goal.tag}"
+                        <Text style={{width: '90%'}}>
+                            #{index + 1}: {goal.tag}
                         </Text>
                         <Button color={"#c55"} onPress={() => this.removeNamedGoal(goal.tag)}
-                                title={"Delete"}/>
+                                title={"X"}/>
                     </View>
                 )}
                 <TextInput style={{height: 40, borderColor: 'gray', borderWidth: 1}}

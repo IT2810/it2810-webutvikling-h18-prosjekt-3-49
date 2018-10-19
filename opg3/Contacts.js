@@ -18,11 +18,11 @@ class Contact extends Component {
         return (
             <View>
                 {this.state.renderMe &&
-                <View>
-                    <Text> {this.props.fname} {this.props.lname} </Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{width: '90%'}}> {this.props.fname} {this.props.lname} </Text>
                     <Button
                         onPress={this.delete}
-                        title="Delete"
+                        title="X"
                         color="#c55"
                         accessibilityLabel="accessibilityLabel er denne teksten"
                     />
@@ -80,7 +80,9 @@ export default class ContactManager extends Component {
         contacts.push({key:Math.random(), fname:fname, lname:lname});
 
         this.setState( {
-                contacts: contacts
+                contacts: contacts,
+                newFname: "",
+                newLname: "",
         });
         this.state.storage._storeData('contacts', contacts);
     }
