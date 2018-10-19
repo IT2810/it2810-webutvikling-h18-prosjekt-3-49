@@ -1,27 +1,10 @@
-import React from 'react';
 import {AsyncStorage} from "react-native";
 
-export default class Storage extends React.Component {
+export default class Storage {
 
     _storeData = async (key, text) => {
         try {
-            await AsyncStorage.setItem(key, text);
-        } catch (error) {
-            // Error saving data
-        }
-    };
-
-    _appendData = async (key, text) => {
-        try {
-            this._retrieveData(key).then(
-                (res) => {
-                    if (res !== "") {
-                        res += ", ";
-                    }
-                    res += text;
-                    this._storeData(key, res);
-                }
-            );
+            await AsyncStorage.setItem(key, JSON.stringify(text));
         } catch (error) {
             // Error saving data
         }
@@ -31,7 +14,7 @@ export default class Storage extends React.Component {
         try {
             const value = await AsyncStorage.getItem(key);
             if (value !== null) {
-                return value;
+                return JSON.parse(value);
             }
         } catch (error) {
             // Error retrieving data
@@ -53,7 +36,15 @@ export default class Storage extends React.Component {
         try {
             AsyncStorage.multiRemove(keys);
         } catch (error) {
-            // Error retrieving data
+            // Error removing data
         }
     };
+
+    _removeAll = async () => {
+        try {
+            AsyncStorage.clear();
+        } catch (error) {
+            // Error removing data
+        }
+    }
 }
