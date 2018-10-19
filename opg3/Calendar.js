@@ -54,7 +54,7 @@ export default class Calendar extends Component {
         </View>
       }
       { this.state.addingEvent &&
-        <View style={[styles.container, { justifyContent: 'center'}]}>
+        <View style={[styles.container, styles.centered]}>
           <TextInput
             style={{height: 40}}
             onChangeText={text => this.setState({addingEventName: text})}
@@ -146,4 +146,9 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     backgroundColor: '#ddd',
   },
+  centered: {
+    width: '70%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  }
 });
