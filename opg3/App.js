@@ -3,25 +3,59 @@ import {StyleSheet, View} from 'react-native';
 import Calendar from './Calendar.js';
 import ContactManager from './Contacts.js';
 import Goals from './Goals.js';
+import { createDrawerNavigator } from 'react-navigation';
 
-export default class App extends React.Component {
+class CalendarScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <Goals/>
                 <Calendar />
-                <ContactManager />
             </View>
         );
     }
 }
 
+class ContactsScreen extends React.Component {
+    render() {
+        return (
+            <View style={styles.container, styles.centered}>
+                <ContactManager />
+            </View>
+        )
+    }
+}
+
+class GoalsScreen extends React.Component {
+    render() {
+        return(
+            <View style={styles.container, styles.centered}>
+                <Goals />
+            </View>
+        )
+    }
+}
+
+export default createDrawerNavigator({
+    Calendar: {
+        screen: CalendarScreen,
+    },
+    Contacts: {
+        screen: ContactsScreen,
+    },
+    Goals: {
+        screen: GoalsScreen,
+    },
+});
+
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
         backgroundColor: '#fff',
         alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
     },
+    centered: {
+        width: '70%',
+        flex: 1,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    }
 });
