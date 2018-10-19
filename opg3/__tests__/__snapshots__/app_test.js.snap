@@ -21,6 +21,7 @@ exports[`renders shallow correctly 1`] = `
       "openDrawer": [Function],
       "router": Object {
         "childRouters": Object {
+          "Accelerometer": null,
           "Calendar": null,
           "Contacts": null,
           "Goals": null,
@@ -55,6 +56,11 @@ exports[`renders shallow correctly 1`] = `
             "key": "Goals",
             "params": undefined,
             "routeName": "Goals",
+          },
+          Object {
+            "key": "Accelerometer",
+            "params": undefined,
+            "routeName": "Accelerometer",
           },
         ],
         "toggleId": 0,
