@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, TextInput, Picker} from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import Storage from './Storage.js'
 
@@ -17,6 +17,8 @@ export default class Calendar extends Component {
       selectedDay: time,
       allItems: {},
       visItems: {},
+      contacts: {},
+      goals: {},
     };
   }
 
@@ -33,6 +35,18 @@ export default class Calendar extends Component {
           }
         }
         this.setState({visItems: newItems});
+      })
+      this.state.storage._retrieveData('contacts').then(value => {
+        if (value !== undefined) {
+          this.setState({contacts: value,
+            selectedContact: value[0]});
+        }
+      })
+      this.state.storage._retrieveData('goals').then(value => {
+        if (value !== undefined) {
+          this.setState({goals: value,
+            selectedGoal: value[0]});
+        }
       })
     }
 
@@ -54,14 +68,34 @@ export default class Calendar extends Component {
         </View>
       }
       { this.state.addingEvent &&
-        <KeyboardAvoidingView style={[styles.container, { justifyContent: 'center'}]} behavior='padding' enabled>
+        <View style={[styles.container, styles.centered]}>
           <TextInput
-            style={{height: 40}}
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
             onChangeText={text => this.setState({addingEventName: text})}
             placeholder='Event name' />
-          <Button title='Add' onPress={this.addEvent.bind(this)} />
-          <Button title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
-        </KeyboardAvoidingView>
+          { this.state.contacts && this.state.contacts.length > 0 &&
+            <Picker
+              selectedValue={this.state.selectedContact}
+              onValueChange={(itemValue, itemIndex) => this.setState({selectedContact: itemValue})}>
+              { this.state.contacts.map(contact => {
+                return (<Picker.Item key={Math.random()} label={contact.fname + " " + contact.lname}
+                  value={contact.fname + " " + contact.lname} />)
+              })}
+            </Picker>
+          }
+          { this.state.goals && this.state.goals.length > 0 &&
+            <Picker
+              selectedValue={this.state.selectedGoal}
+              onValueChange={(itemValue, itemIndex) => this.setState({selectedGoal: itemValue})}>
+              { this.state.goals.map(goal => {
+                return (<Picker.Item key={Math.random()} label={goal.tag}
+                  value={goal.tag} />)
+              })}
+            </Picker>
+          }
+          <Button color='#4a4' title='Add' onPress={this.addEvent.bind(this)} />
+          <Button color='#c55' title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
+        </View>
       }
       </View>
     );
@@ -85,16 +119,11 @@ export default class Calendar extends Component {
       <View style={[styles.event]}>
         <Text>{item.text}</Text>
         {item.goal &&
-          <Text>Working towards: {item.goal}</Text>
+          <Text>Working towards: {item.goal.tag}</Text>
         }
         {item.contacts &&
           <View>
-            <Text>With:</Text>
-            <FlatList
-              data={item.contacts}
-              renderItem={({item}) => <Text>{item}</Text>}
-              keyExtractor={(item, index) => index.toString()}>
-            </FlatList>
+            <Text>With: {item.contacts.fname} {item.contacts.lname}</Text>
           </View>
         }
       </View>
@@ -116,8 +145,10 @@ export default class Calendar extends Component {
     if (this.state.allItems[today]) {
       items = this.state.allItems[today].items
     }
-
-    let newItem = {text: this.state.addingEventName};
+    let newItem = {text: this.state.addingEventName,
+      contacts: this.state.selectedContact,
+      goal: this.state.selectedGoal,
+    };
 
     let newAllItems = {};
     newAllItems[today] = {marked: true, items: [...items, newItem]};
@@ -141,9 +172,14 @@ const styles = StyleSheet.create({
     height: '100%',
   },
   event: {
-    minHeight: 60,
+    minHeight: 80,
     margin: 4,
     marginBottom: 0,
     backgroundColor: '#ddd',
   },
+  centered: {
+    width: '70%',
+    justifyContent: 'center',
+    alignSelf: 'center',
+  }
 });

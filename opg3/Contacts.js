@@ -3,6 +3,37 @@ import {StyleSheet, Text, View, Button, TextInput} from 'react-native'
 import Storage from './Storage.js'
 
 
+
+class Contact extends Component {
+    constructor(props) {
+        super(props);
+        this.delete = this.delete.bind(this);
+        this.state = {renderMe: true};
+    }
+    delete() {
+        this.props.removeContact(this.props.id);
+        this.setState({renderMe: false});
+    }
+
+    render() {
+        return (
+            <View>
+                {this.state.renderMe &&
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{width: '90%'}}> {this.props.fname} {this.props.lname} </Text>
+                    <Button
+                        onPress={this.delete}
+                        title="X"
+                        color="#c55"
+                        accessibilityLabel="accessibilityLabel er denne teksten"
+                    />
+                </View>
+                }
+            </View>
+        );
+    }
+}
+
 export default class ContactManager extends Component {
     constructor(props) {
         super(props);
@@ -30,7 +61,9 @@ export default class ContactManager extends Component {
         contacts.push({key:Math.random(), fname:fname, lname:lname});
 
         this.setState( {
-                contacts: contacts
+                contacts: contacts,
+                newFname: "",
+                newLname: "",
         });
         this.state.storage._storeData('contacts', contacts);
     }
@@ -76,11 +109,11 @@ export default class ContactManager extends Component {
                     onPress={() => this.addContact
                     (this.state.newFname, this.state.newLname)}
                     title="Add"
-                    color="#20FF18"
+                    color="#4a4"
                     accessibilityLabel="accessibilityLabel er denne teksten"
                 />
             </View>
-            
+
         </View>
         }
         </View>
