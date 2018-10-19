@@ -52,4 +52,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff',
         alignSelf: 'stretch',
     },
+    centered: {
+        width: '70%',
+        flex: 1,
+        justifyContent: 'center',
+        alignSelf: 'center',
+    }
 });
