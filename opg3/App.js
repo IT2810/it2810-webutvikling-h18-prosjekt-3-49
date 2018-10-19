@@ -8,7 +8,7 @@ import { createDrawerNavigator } from 'react-navigation';
 class CalendarScreen extends React.Component {
     render() {
         return (
-            <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
+            <KeyboardAvoidingView behavior='padding' enabled>
                 <Calendar />
             </KeyboardAvoidingView>
         );
@@ -18,7 +18,7 @@ class CalendarScreen extends React.Component {
 class ContactsScreen extends React.Component {
     render() {
         return (
-            <KeyboardAvoidingView style={styles.container, styles.centered} behavior='padding' enabled>
+            <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
                 <ContactManager />
             </KeyboardAvoidingView>
         )
@@ -28,7 +28,7 @@ class ContactsScreen extends React.Component {
 class GoalsScreen extends React.Component {
     render() {
         return(
-            <KeyboardAvoidingView style={styles.container, styles.centered} behavior='padding' enabled>
+            <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
                 <Goals />
             </KeyboardAvoidingView>
         )
@@ -50,9 +50,6 @@ export default createDrawerNavigator({
 const styles = StyleSheet.create({
     container: {
         backgroundColor: '#fff',
-        alignSelf: 'stretch',
-    },
-    centered: {
         width: '70%',
         flex: 1,
         justifyContent: 'center',
