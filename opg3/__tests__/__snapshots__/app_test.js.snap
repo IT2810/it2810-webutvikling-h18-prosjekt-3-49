@@ -1,0 +1,72 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders shallow correctly 1`] = `
+<Navigator
+  navigation={
+    Object {
+      "actions": Object {
+        "closeDrawer": [Function],
+        "openDrawer": [Function],
+        "toggleDrawer": [Function],
+      },
+      "addListener": [Function],
+      "closeDrawer": [Function],
+      "dangerouslyGetParent": [Function],
+      "dispatch": [Function],
+      "getChildNavigation": [Function],
+      "getScreenProps": [Function],
+      "goBack": [Function],
+      "isFocused": [Function],
+      "navigate": [Function],
+      "openDrawer": [Function],
+      "router": Object {
+        "childRouters": Object {
+          "Accelerometer": null,
+          "Calendar": null,
+          "Contacts": null,
+          "Goals": null,
+        },
+        "getActionCreators": [Function],
+        "getActionForPathAndParams": [Function],
+        "getComponentForRouteName": [Function],
+        "getComponentForState": [Function],
+        "getPathAndParamsForState": [Function],
+        "getScreenOptions": [Function],
+        "getStateForAction": [Function],
+      },
+      "setParams": [Function],
+      "state": Object {
+        "closeId": 0,
+        "index": 0,
+        "isDrawerOpen": false,
+        "isTransitioning": false,
+        "openId": 0,
+        "routes": Array [
+          Object {
+            "key": "Calendar",
+            "params": undefined,
+            "routeName": "Calendar",
+          },
+          Object {
+            "key": "Contacts",
+            "params": undefined,
+            "routeName": "Contacts",
+          },
+          Object {
+            "key": "Goals",
+            "params": undefined,
+            "routeName": "Goals",
+          },
+          Object {
+            "key": "Accelerometer",
+            "params": undefined,
+            "routeName": "Accelerometer",
+          },
+        ],
+        "toggleId": 0,
+      },
+      "toggleDrawer": [Function],
+    }
+  }
+/>
+`;
