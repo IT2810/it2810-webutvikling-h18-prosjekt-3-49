@@ -3,37 +3,6 @@ import {StyleSheet, Text, View, Button, TextInput} from 'react-native'
 import Storage from './Storage.js'
 
 
-
-class Contact extends Component {
-    constructor(props) {
-        super(props);
-        this.delete = this.delete.bind(this);
-        this.state = {renderMe: true};
-    }
-    delete() {
-        this.props.removeContact(this.props.id);
-        this.setState({renderMe: false});
-    }
-
-    render() {
-        return (
-            <View>
-                {this.state.renderMe &&
-                <View style={{flexDirection: 'row'}}>
-                    <Text style={{width: '90%'}}> {this.props.fname} {this.props.lname} </Text>
-                    <Button
-                        onPress={this.delete}
-                        title="X"
-                        color="#c55"
-                        accessibilityLabel="accessibilityLabel er denne teksten"
-                    />
-                </View>
-                }
-            </View>
-        );
-    }
-}
-
 export default class ContactManager extends Component {
     constructor(props) {
         super(props);
@@ -137,12 +106,12 @@ class Contact extends Component {
         return (
             <View>
                 {this.state.renderMe &&
-                <View>
-                    <Text> {this.props.fname} {this.props.lname} </Text>
+                <View style={{flexDirection: 'row'}}>
+                    <Text style={{width: '90%'}}> {this.props.fname} {this.props.lname} </Text>
                     <Button
                         onPress={this.delete}
-                        title="Delete"
-                        color="#FF2018"
+                        title="X"
+                        color="#c55"
                         accessibilityLabel="accessibilityLabel er denne teksten"
                     />
                 </View>
@@ -151,28 +120,3 @@ class Contact extends Component {
         );
     }
 }
-
-
-const styles = StyleSheet.create({
-
-    picture: {
-        backgroundColor: "#abcccc",
-        alignItems: "center",
-    },
-
-    infoLine: {
-        flexDirection: "row",
-        paddingLeft: 10,
-        borderBottomWidth: 1,
-        borderBottomColor: "#aaa",
-    },
-
-    text: {
-        fontSize: 18,
-        paddingBottom: 15,
-        paddingTop: 15,
-        paddingLeft: 20,
-    },
-});
-/*
-*/

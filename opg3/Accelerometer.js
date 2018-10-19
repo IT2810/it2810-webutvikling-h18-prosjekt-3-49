@@ -1,6 +1,6 @@
 import React from 'react';
 import {Accelerometer} from "expo";
-import {Text, View} from "react-native";
+import {StyleSheet, Text, View} from "react-native";
 import roundTo from 'round-to';
 
 
@@ -50,7 +50,7 @@ export default class Acc extends React.Component {
         }
         if (Math.abs(x) >= Math.abs(y) && Math.abs(x) >= Math.abs(z)) {
             return (
-                <View>
+                <View style={styles.container}>
                     <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
                     <Text style={{backgroundColor: '#66DF59'}}>It seems that your phone is in landscape-mode!</Text>
                 </View>
@@ -59,7 +59,7 @@ export default class Acc extends React.Component {
 
         if (Math.abs(y) >= Math.abs(x) && Math.abs(y) >= Math.abs(z)) {
             return (
-                <View>
+                <View style={styles.container}>
                     <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
                     <Text style={{backgroundColor: '#6D6FEF'}}>It seems that your phone is in portrait-mode!</Text>
                 </View>
@@ -68,7 +68,7 @@ export default class Acc extends React.Component {
 
         if (Math.abs(z) >= Math.abs(x) && Math.abs(z) >= Math.abs(y)) {
             return (
-                <View>
+                <View style={styles.container}>
                     <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
                     <Text style={{backgroundColor: '#5CAACC'}}>It seems that your phone is lying down!</Text>
                 </View>
@@ -76,10 +76,20 @@ export default class Acc extends React.Component {
         }
 
         return (
-            <View>
+            <View style={styles.container}>
                 <Text style={{fontWeight: 'bold'}}>Accelerometer demo:</Text>
                 <Text>Values are undefined</Text>
             </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    container: {
+        backgroundColor: '#fff',
+        width: '70%',
+        height: '100%',
+        justifyContent: 'center',
+        alignSelf: 'center',
+    }
+});
