@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View} from 'react-native';
+import {StyleSheet, View, KeyboardAvoidingView} from 'react-native';
 import Calendar from './Calendar.js';
 import ContactManager from './Contacts.js';
 import Goals from './Goals.js';
@@ -8,9 +8,9 @@ import { createDrawerNavigator } from 'react-navigation';
 class CalendarScreen extends React.Component {
     render() {
         return (
-            <View style={styles.container}>
+            <KeyboardAvoidingView style={styles.container} behavior='padding' enabled>
                 <Calendar />
-            </View>
+            </KeyboardAvoidingView>
         );
     }
 }
@@ -18,9 +18,9 @@ class CalendarScreen extends React.Component {
 class ContactsScreen extends React.Component {
     render() {
         return (
-            <View style={styles.container, styles.centered}>
+            <KeyboardAvoidingView style={styles.container, styles.centered} behavior='padding' enabled>
                 <ContactManager />
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }
@@ -28,9 +28,9 @@ class ContactsScreen extends React.Component {
 class GoalsScreen extends React.Component {
     render() {
         return(
-            <View style={styles.container, styles.centered}>
+            <KeyboardAvoidingView style={styles.container, styles.centered} behavior='padding' enabled>
                 <Goals />
-            </View>
+            </KeyboardAvoidingView>
         )
     }
 }

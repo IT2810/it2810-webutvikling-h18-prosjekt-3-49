@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, View, FlatList, Button, TextInput, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, View, FlatList, Button, TextInput} from 'react-native';
 import { Agenda } from 'react-native-calendars';
 import Storage from './Storage.js'
 
@@ -54,14 +54,14 @@ export default class Calendar extends Component {
         </View>
       }
       { this.state.addingEvent &&
-        <KeyboardAvoidingView style={[styles.container, { justifyContent: 'center'}]} behavior='padding' enabled>
+        <View style={[styles.container, { justifyContent: 'center'}]}>
           <TextInput
             style={{height: 40}}
             onChangeText={text => this.setState({addingEventName: text})}
             placeholder='Event name' />
           <Button title='Add' onPress={this.addEvent.bind(this)} />
           <Button title='Cancel' onPress={() => {this.setState({addingEvent: false})}} />
-        </KeyboardAvoidingView>
+        </View>
       }
       </View>
     );
